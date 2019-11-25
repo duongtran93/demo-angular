@@ -1,0 +1,49 @@
+<div class="card">
+  <div class="card-header">
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" (keyup)="search($event)">
+<!--      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
+    </form>
+    <hr>
+    <div class="col-4">
+      <h5>Filter By: {{ keyword}}</h5>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <button class="btn btn-primary" routerLink="/products/create">Add</button>
+    <button class="btn btn-primary" (click)="showHide()">Show/Hide</button>
+    {{ message }}
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col">STT</th>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+        <ng-container *ngIf="show">
+        <th scope="col">Image</th>
+        </ng-container>
+        <th>Rating</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let product of productFilter, let i = index">
+        <th scope="row">{{ i + 1}}</th>
+        <td>{{ product.name}}</td>
+        <td>{{ product.price}}</td>
+        <ng-container *ngIf="show">
+        <td><img src="{{ product.image}}" width="{{ widthImage}}"></td>
+        </ng-container>
+        <td><app-star [star]="product.star" (clickStar)="showMessage($event)"></app-star></td>
+        <td>
+          <button class="btn btn-danger" (click)="delete(i)">Delete</button>
+        </td>
+        <td>
+          <button class="btn btn-success" [routerLink]="['/products', i, 'edit']">Edit</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

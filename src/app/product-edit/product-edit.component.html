@@ -1,0 +1,45 @@
+<div class="container">
+  <h3>Product Edit</h3>
+
+  <div class="row">
+    <form [formGroup]="updateProductForm" (ngSubmit)="submit()">
+      <div class="form-group">
+        <label>Id</label>
+        <input type="text" class="form-control" formControlName="id">
+        <div *ngIf="id.invalid && id.touched">
+          <div *ngIf="id.errors.required">
+            <p class="text-danger">Trường này không được để trống</p>
+          </div>
+          <div *ngIf="id.errors.minlength">
+            <p class="text-danger">Cần ít nhất 4 ký tự</p>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" class="form-control" formControlName="name">
+        <div *ngIf="name.invalid && name.touched">
+          <div *ngIf="name.errors.required">
+            <p class="text-danger">Trường này không được để trống</p>
+          </div>
+          <div *ngIf="name.errors.minlength">
+            <p class="text-danger">Cần ít nhất 4 ký tự</p>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Price</label>
+        <input type="text" class="form-control" formControlName="price">
+        <div *ngIf="price.invalid && price.touched">
+          <div *ngIf="price.errors.required">
+            <p class="text-danger">Trường này không được để trống</p>
+          </div>
+          <div *ngIf="price.errors.minlength">
+            <p class="text-danger">Cần ít nhất 4 ký tự</p>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-primary" [disabled]="!updateProductForm.valid">Submit</button>
+    </form>
+  </div>
+</div>
